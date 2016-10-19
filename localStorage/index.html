@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>本地存储</title>
+</head>
+<body>
+	<p>本地存储</p>
+	<script type="text/javascript">
+		//添加key-value 数据到 sessionStorage
+		      sessionStorage.setItem("demokey", "http://https://github.com/cy0707");
+		      //通过key来获取value
+		      var dt = sessionStorage.getItem("demokey");
+		      console.log(dt);
+		      //清空所有的key-value数据。
+		      //sessionStorage.clear();
+		      console.log(sessionStorage.length);
+	</script>
+</body>
+</html>
