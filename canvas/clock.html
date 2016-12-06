@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas画时钟</title>
+	<style type="text/css">
+		.canvas-box {
+			margin-top: 100px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div class="canvas-box">
+		<canvas id="clock" width='200px' height='200px'></canvas>
+	</div>
+	<script>
+		;(function(){
+			var canvas = document.getElementById('clock'),
+				context = canvas.getContext('2d'),
+				cw = canvas.width,
+				ch = canvas.height,
+				r = cw/2;
+
+			// 画背景的黑色的圆
+			function drawCircle() {
+				// 移动canvas的坐标轴原点
+				context.translate(r, r);
+				// 开始绘制路径
+				context.beginPath();
+				// 圆的宽度
+				context.lineWidth = 10;
+				// 画圆
+			    context.arc(0, 0, r-5, 0, Math.PI*2, false);
+				// 路径画好后，进行描边
+				context.stroke(); 
+				// 结束路径
+				context.closePath();
+			}
+
+			// 画刻度与数字
+			function drawNumber() {
+				// 从水平方向0°顺时针方向进行数时钟的
+				var hourNumber = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2];
+				// 设置字体大小和对齐方式
+				context.font = '18px Arial';
+				context.textAlign = 'center';
+				context.textBaseline = 'middle';
+				// 求出每一个时钟对应的x和y坐标
+				hourNumber.forEach(function(number, index){
+					// 一个圆的弧度为2π，分成12份，那么每一个数字都占有弧度如下
+					var numberRad = Math.PI*2 / 12 * index,
+					// 每一个数字的的x和y坐标,把半径缩小一些让数字在圆内
+					    numberX = Math.cos(numberRad)*(r-30),
+					    numberY = Math.sin(numberRad)*(r-30);
+					// 画文字
+					context.fillText(number, numberX, numberY);
+				});
+
+				// 画刻度
+				for (var i = 0; i < 60; i++) {
+					var diaRad = Math.PI*2 / 60 * i,
+					// 刻度比数字更靠近边缘
+						diaX = Math.cos(diaRad)*(r-15),
+						diaY = Math.sin(diaRad)*(r-15);
+					// 重新开始话路径
+					context.beginPath();
+					// 判断如果是数字的刻度，颜色深一些，不是的话颜色前一些
+					if (i % 5 === 0) {
+						context.fillStyle = '#333';
+					}else {
+						context.fillStyle = '#999';
+					}
+					// 画刻度路径
+					context.arc(diaX, diaY, 2, 0, 2*Math.PI, false);
+					// 填充刻度
+					context.fill();
+					// 关闭路径
+					context.closePath();
+				}
+			}
+
+			// 画小时刻度
+			function drawHour(hour, minute) {
+				// 把前面的状态存档，开始这个状态
+				context.save();
+				// 开始新路径
+				context.beginPath();
+				// 获取弧度
+				var hourRad = 2 * Math.PI / 12 * hour + 2 * Math.PI / 12 / 60 * minute;
+				// 旋转弧度
+				context.rotate(hourRad);
+				context.lineWidth = 6;
+				// 设置线段的端点的样式，为圆的
+				context.lineCap = 'round';
+				// 线段的开始的坐标
+				context.moveTo(0, 10);
+				context.lineTo(0, -r / 2);
+				context.stroke();
+				// 关闭路径
+				context.closePath();
+				// 恢复到上一个状态
+				context.restore();
+			}
+			// 画分钟刻度
+			function drawMinute(minute) {
+				// 把前面的状态存档，开始这个状态
+				context.save();
+				// 开始新路径
+				context.beginPath();
+				// 获取弧度
+				var minuteRad = 2 * Math.PI / 60 * minute;
+				// 旋转弧度
+				context.rotate(minuteRad);
+				context.lineWidth = 3;
+				// 设置线段的端点的样式，为圆的
+				context.lineCap = 'round';
+				// 线段的开始的坐标
+				context.moveTo(0, 10);
+				context.lineTo(0, -r + 30);
+				context.stroke();
+				// 关闭路径
+				context.closePath();
+				// 恢复到上一个状态
+				context.restore();
+			}
+			// 画秒针刻度,是一个不规则的形状
+			function drawSecond(second) {
+				// 把前面的状态存档，开始这个状态
+				context.save();
+				// 开始新路径
+				context.beginPath();
+				context.fillStyle = '#c14543';
+				// 获取弧度
+				var secondRad = 2 * Math.PI / 60 * second;
+				// 旋转弧度
+				context.rotate(secondRad);
+				// 线段的开始的坐标
+				context.moveTo(-2, 20);
+				context.lineTo(2, 20);
+				context.lineTo(1, -r + 18);
+				context.lineTo(-1, -r + 18);
+				context.fill();
+				// 关闭路径
+				context.closePath();
+				// 恢复到上一个状态
+				context.restore();
+			}
+
+			// 画中心的小圆点
+			function drawDot() {
+				context.beginPath();
+				context.fillStyle = '#fff';
+				context.arc(0, 0, 3, 0, 2*Math.PI, false);
+				context.fill();
+				context.closePath();
+			}
+			// 画整个时钟
+			function drawClock() {
+				drawCircle();
+				drawNumber();
+				drawHour(1, 30);
+				drawMinute(30);
+				drawSecond(40);
+				drawDot();
+			}
+			drawClock();
+
+		})()
+	</script>
+</body>
+</html>
