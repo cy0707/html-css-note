@@ -29,7 +29,11 @@
 				// 星星的数量
 				num = 50,
 				// 星星对象的组合
-				stars = [];
+				stars = [],
+				imgGirl = new Image(),
+				imgStar = new Image();
+
+
 			
 			// 画布的背景
 			function drawBackground() {
@@ -38,11 +42,13 @@
 			}
 
 			// 加载女孩图片
-			var imgGirl = new Image();
-			imgGirl.src = 'images/girl.jpg';
 			function drawGirl() {
+				imgGirl.src = 'images/girl.jpg';
 				imgGirl.onload = function() {
 					context.drawImage(imgGirl, 50, 50, 800, 400);
+					// 为了保证在谷歌浏览器的，图片异步加载中
+					// 星星图片一种在最上层。只能等大图女孩加载完后，再执行加载画星星
+					drawManyStar();
 				}
 			}
 
@@ -60,11 +66,9 @@
 				}
 			}
 
-			// 加载星星图片
-			var imgStar = new Image();
-			imgStar.src = 'images/star.png';
 			// 绘制很多星星
 			function drawManyStar() {
+				imgStar.src = 'images/star.png';
 				imgStar.onload = function() {
 					for (var i = 0; i < num; i++) {
 						// 把每一星星继承星构造函数
@@ -80,7 +84,7 @@
 			function drawTwinkleStar() {
 				drawBackground();
 				drawGirl();
-				drawManyStar();
+				// drawManyStar();
 				// window.requestAnimationFrame(drawTwinkleStar);
 			}
 			drawTwinkleStar();
