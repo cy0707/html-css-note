@@ -24,6 +24,7 @@
 
 			// 画背景的黑色的圆
 			function drawCircle() {
+				context.save();
 				// 移动canvas的坐标轴原点
 				context.translate(r, r);
 				// 开始绘制路径
@@ -157,15 +158,26 @@
 			}
 			// 画整个时钟
 			function drawClock() {
+				// 每执行一次，清楚掉canvas画布
+				context.clearRect(0, 0, cw, ch);
+				// 获取当前时间
+				var nowTime = new Date(),
+					hour = nowTime.getHours(),
+					minute = nowTime.getMinutes(),
+					second = nowTime.getSeconds();
 				drawCircle();
 				drawNumber();
-				drawHour(1, 30);
-				drawMinute(30);
-				drawSecond(40);
+				drawHour(hour, minute);
+				drawMinute(minute);
+				drawSecond(second);
 				drawDot();
+				// 恢复到原来状态
+				context.restore();
+				setTimeout(function(){
+					drawClock();
+				},1000);
 			}
 			drawClock();
-
 		})()
 	</script>
 </body>
