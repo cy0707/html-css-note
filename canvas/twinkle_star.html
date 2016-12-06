@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>闪烁的星星</title>
+	<style type="text/css">
+		.canvas-box {
+			margin-top: 100px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div class="canvas-box">
+		<canvas id="star" width='900px' height='500px'></canvas>
+	</div>
+	<script src="js/requestAnimationFrame.js"></script>
+	<script>
+		;(function(){
+			var canvas = document.getElementById('star');
+			// 不支持的浏览器直接不显示
+			if (!canvas || !canvas.getContext) {
+				alert("您的浏览器太旧了,升级您的浏览器");
+				return false;
+			}
+			var	context = canvas.getContext('2d'),
+			    cw = canvas.width,
+				ch = canvas.height,
+				// 星星的数量
+				num = 50,
+				// 星星对象的组合
+				stars = [];
+			
+			// 画布的背景
+			function drawBackground() {
+				context.fillStyle = '#392550';
+				context.fillRect(0, 0, cw, ch);
+			}
+
+			// 加载女孩图片
+			var imgGirl = new Image();
+			imgGirl.src = 'images/girl.jpg';
+			function drawGirl() {
+				imgGirl.onload = function() {
+					context.drawImage(imgGirl, 50, 50, 800, 400);
+				}
+			}
+
+
+			// 创建星星的构造函数
+			function Star() {};
+			Star.prototype = {
+				// 初始化坐标
+				init: function() {
+					this.x = Math.random()*800 + 50;
+					this.y = Math.random()*400 + 50;
+				},
+				drawStar: function() {
+					context.drawImage(imgStar, this.x, this.y);
+				}
+			}
+
+			// 加载星星图片
+			var imgStar = new Image();
+			imgStar.src = 'images/star.png';
+			// 绘制很多星星
+			function drawManyStar() {
+				imgStar.onload = function() {
+					for (var i = 0; i < num; i++) {
+						// 把每一星星继承星构造函数
+						var starObj = new Star();
+						stars.push(starObj);
+						stars[i].init();
+						stars[i].drawStar();
+					}
+				}
+			}
+
+			// 画闪烁的星星
+			function drawTwinkleStar() {
+				drawBackground();
+				drawGirl();
+				drawManyStar();
+				// window.requestAnimationFrame(drawTwinkleStar);
+			}
+			drawTwinkleStar();
+		})()
+	</script>
+</body>
+</html>
