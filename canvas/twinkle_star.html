@@ -8,6 +8,9 @@
 			margin-top: 100px;
 			text-align: center;
 		}
+		#star {
+			position: relative;
+		}
 	</style>
 </head>
 <body>
@@ -27,12 +30,37 @@
 			    cw = canvas.width,
 				ch = canvas.height,
 				// 星星的数量
-				num = 50,
+				num = 100,
 				// 星星对象的组合
 				stars = [],
+				show = false, //星星是否出现的标志
+				life = 0, //星星的生命值，最开始为0
 				imgGirl = new Image(),
-				imgStar = new Image();
+				imgStar = new Image(),
+				// 让星星平缓的出现
+				lastTime, //星星上一次出现的时间
+				currentTime, //当前星星出现的时间
+				daltaTime; //当前出现的时间与上一次出现的时间的间隔
 
+
+			// 初始化
+			function init() {
+				// 女孩图片
+				imgGirl.src = 'images/girl.jpg';
+				// 星星图片
+				imgStar.src = 'images/star.png';
+				// 星星初始化
+				for (var i = 0; i < num; i++) {
+					// 把每一星星继承星构造函数
+					stars[i] = new Star();
+					stars[i].init();
+				}
+				// 得到把全部星星绘制好的时间
+				lastTime = Date.now();
+				// 画星星
+				drawTwinkleStar();
+
+			}
 
 			
 			// 画布的背景
@@ -43,51 +71,122 @@
 
 			// 加载女孩图片
 			function drawGirl() {
-				imgGirl.src = 'images/girl.jpg';
-				imgGirl.onload = function() {
-					context.drawImage(imgGirl, 50, 50, 800, 400);
-					// 为了保证在谷歌浏览器的，图片异步加载中
-					// 星星图片一种在最上层。只能等大图女孩加载完后，再执行加载画星星
-					drawManyStar();
-				}
+				context.drawImage(imgGirl, 50, 50, 800, 400);
 			}
 
-
 			// 创建星星的构造函数
-			function Star() {};
+			function Star() {
+				// 对两次星星的间隔时间进行判断
+				this.timer = 0;
+			};
 			Star.prototype = {
 				// 初始化坐标
 				init: function() {
 					this.x = Math.random()*800 + 50;
 					this.y = Math.random()*400 + 50;
+					// 序列帧的number编号
+					this.starNumber = Math.floor(Math.random()*7);
+					// 星星移动的速度
+					this.xSpeed = Math.random()*3 - 1.5; //得到一个有正有负的值，这样可以上下移动
+					this.ySpeed = Math.random()*3 - 1.5;
 				},
+				// 画星星
 				drawStar: function() {
-					context.drawImage(imgStar, this.x, this.y);
+					// 把前一个状态进行存档
+					context.save();
+					// 对该星星的的透明度的改变
+					context.globalAlpha = life;
+					// 把星星序列帧上面的小星星一帧的复制下来
+					// drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh)
+					context.drawImage(imgStar, this.starNumber*7, 0, 7, 7, this.x, this.y, 7, 7);
+					// 恢复前一个状态
+					context.restore();
+				},
+				// 更新星星
+				updateStar: function() {
+					// 星星位移的更新
+					this.x += this.xSpeed*daltaTime*0.004;
+					this.y += this.ySpeed*daltaTime*0.004;
+
+					// 星星超出图片区域的范围，重新出现在图片区域内
+					// x,y的范围超出后，重新执行init方法，跳出该函数
+					if (this.x <= 50 || this.x >= 850) {
+						this.init();
+						return;
+					}
+					if (this.y <=50 || this.y >= 450) {
+						this.init();
+						return;
+					}
+
+					this.timer += daltaTime;
+					if (this.timer > 50) {
+						// 如果时间累计大于50毫秒，序列帧加1
+						this.starNumber += 1;
+						//当序列帧等于7时，那么把序列帧重置为0;
+						this.starNumber %= 7
+						// 重置timer为0;进行下一次判断
+						this.timer = 0;
+					}
 				}
 			}
-
-			// 绘制很多星星
-			function drawManyStar() {
-				imgStar.src = 'images/star.png';
-				imgStar.onload = function() {
-					for (var i = 0; i < num; i++) {
-						// 把每一星星继承星构造函数
-						var starObj = new Star();
-						stars.push(starObj);
-						stars[i].init();
-						stars[i].drawStar();
+			// 鼠标移入时，星星的显示
+			function aliveUpdate() {
+				if (show) {
+					// 渐变出现
+					life += 0.03*daltaTime*0.05;
+					if (life > 1) {
+						life = 1;
 					}
+					drawStar();
+				}else {
+					life -= 0.03*daltaTime*0.05;
+					if (life < 0) {
+						life = 0;
+					}
+				}
+			}
+			// 画星星
+			function drawStar() {
+				for (var i = 0; i < num; i++) {
+					stars[i].updateStar();
+					stars[i].drawStar();
 				}
 			}
 
 			// 画闪烁的星星
 			function drawTwinkleStar() {
+				currentTime = Date.now();
+				daltaTime = currentTime - lastTime;
+				// 重新赋值,进行下一轮的判断
+				lastTime = currentTime;
 				drawBackground();
-				drawGirl();
-				// drawManyStar();
-				// window.requestAnimationFrame(drawTwinkleStar);
+				drawGirl();	
+				aliveUpdate();	
+				window.requestAnimationFrame(drawTwinkleStar);		
 			}
-			drawTwinkleStar();
+
+			// 鼠标移入事件
+			canvas.addEventListener('mousemove', move, false);
+
+			function move(event) {
+				// 对鼠标的移入点进行范围判断
+				// 在早期的Firefox中，用layerX代替offsetX，并且
+				// 其作用的元素必须进行非static的定位
+				var mX = event.offsetX == undefined ? event.layerX : event.offsetX;
+				var mY = event.offsetY == undefined ? event.layerY : event.offsetY;
+				if( mX >= 50 && mX <= 850 && mY >= 50 && mY <= 450){
+					// 如果鼠标移入这个范围之内，那么此时星星就会显示
+					show = true;
+				}else {
+					// 不在这个范围，就消失
+					show = false;
+				}
+
+			}
+
+			// 初始化开始
+			init();
 		})()
 	</script>
 </body>
