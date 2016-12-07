@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>七巧板</title>
+	<style type="text/css">
+	</style>
+</head>
+<body>
+		<canvas id="star" width='800' height='800'></canvas>
+	<script>
+		;(function(){
+			var canvas = document.getElementById('star');
+			// 不支持的浏览器直接不显示
+			if (!canvas || !canvas.getContext) {
+				alert("您的浏览器太旧了,升级您的浏览器");
+				return false;
+			}
+			var	context = canvas.getContext('2d'),
+			// 七巧板的颜色
+			    tangram = [
+			    	{
+			    		p: [{x: 0, y: 0}, {x: 800, y:0}, {x:400, y:400}],
+			    		color: '#caff67'
+			    	},
+			    	{
+			    		p: [{x: 0, y: 0}, {x: 400, y:400}, {x:0, y:800}],
+			    		color: '#67beef'
+			    	},
+			    	{
+			    		p: [{x: 800, y: 0}, {x: 800, y:400}, {x:600, y:600}, {x:600, y:200}],
+			    		color: '#ef3d61'
+			    	},
+			    	{
+			    		p: [{x: 600, y:200}, {x: 600, y:600}, {x:400, y:400}],
+			    		color: '#f9f51a'
+			    	},
+			    	{
+			    		p: [{x: 400, y: 400}, {x: 600, y:600}, {x:400, y:800}, {x:200, y:600}],
+			    		color: '#a594c0'
+			    	},
+			    	{
+			    		p: [{x: 200, y:600}, {x: 400, y:800}, {x:0, y:800}],
+			    		color: '#fa8ecc'
+			    	},
+			    	{
+			    		p: [{x:800, y: 400}, {x: 800, y:800}, {x:400, y:800}],
+			    		color: '#f6ca29'
+			    	}
+
+			    ];
+
+			for (var i = 0, len = tangram.length ; i < len; i++) {
+				drawPuzzle(tangram[i], context);
+			}
+
+			function drawPuzzle(piece, ctx) {
+				var lineLength = piece.p.length;
+				ctx.beginPath();
+				ctx.moveTo(piece.p[0].x, piece.p[0].y);
+				for (var i = 1; i < lineLength; i++) {
+					ctx.lineTo(piece.p[i].x, piece.p[i].y)
+				}
+				ctx.closePath();
+				ctx.fillStyle = piece.color;
+				ctx.fill();
+			}
+
+		})()
+	</script>
+</body>
+</html>
