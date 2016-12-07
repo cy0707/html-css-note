@@ -22,6 +22,7 @@
 	// 注意此时设置的是Canvas的元素的宽高
 	canvas.width = cw;
 	canvas.height = ch;
+
 	// 把当前时间与目标时间计算，得到剩余的秒数
 	function getShowSeconds() {
 		var nowTime = new Date();
@@ -31,11 +32,31 @@
 		return ret >= 0 ? ret : 0;
 	}
 
-	function render() {
-		// 分别取出时间差的中的小时,分钟,秒数
-		curShowSeconds = getShowSeconds();
+	//更新时间
+	function update() {
+		// 下一次的时间,与目标时间差
+		var nextShowSeconds = getShowSeconds(),
+		    nextHours = parseInt(nextShowSeconds/3600),
+			nextMinutes = parseInt((nextShowSeconds - nextHours*3600)/60),
+			nextSeconds = nextShowSeconds%60;
+		// 现在的时间，与目标时间差
+		    curHours = parseInt(curShowSeconds/3600),
+			curMinutes = parseInt((curShowSeconds - curHours*3600)/60),
+			curSeconds = curShowSeconds%60;
+		// 判断这两次的秒数是否相同，相同则不变换，不相同，则变换
+		if (nextSeconds != curSeconds) {
+			// 把当前的时间设置为下一次的时间
+			// 对于当前时间差更新
+			curShowSeconds = nextShowSeconds;
+		}
+	}
 
-		// 定义时间
+	// 绘制时间
+	function render() {
+		// 清楚画布
+		context.clearRect(0, 0, cw, ch);
+		// 分别取出时间差的中的小时,分钟,秒数
+		curShowSeconds = getShowSeconds(); //先执行render求出当前时间差。画在canvas画布上面
 		var hours = parseInt(curShowSeconds/3600),
 		// 小时是用差值的秒数除以3600秒，取整得到
 			minutes = parseInt((curShowSeconds - hours*3600)/60),
@@ -84,6 +105,12 @@
 		}
 	}
 
-	// 绘制画布
-	render();
+	// 根据时间实时的更新画布的数字
+	function init() {
+		render();
+		update();
+		window.requestAnimationFrame(init);
+	}
+	init();
+	
 })()
