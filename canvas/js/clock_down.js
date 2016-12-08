@@ -13,8 +13,6 @@
 		leftDistance = Math.round(cw/10),
 	// 元素距离左边距的距离
 		topDistance = Math.round(ch/5),
-	// 设置目标时间
-		endTime = new Date('2016/12/8, 14:58:00'),
 	// 当前时间显示的秒数
 		curShowSeconds = 0,
 	// 随机出现的小球的数组集合
@@ -43,10 +41,10 @@
 	// 把当前时间与目标时间计算，得到剩余的秒数
 	function getShowSeconds() {
 		var nowTime = new Date();
-		// 时间差,把毫秒数转为秒数
-		var ret = Math.round((endTime.getTime() - nowTime.getTime())/1000);
+		// 获取今天已经走过的时间，不能用getTime()这个时间是因为是对于1970年的时间
+		var ret = nowTime.getHours()*3600 + nowTime.getMinutes()*60 + nowTime.getSeconds();
 		// 判断这个时间差
-		return ret >= 0 ? ret : 0;
+		return ret;
 	}
 
 	//更新时间
@@ -149,14 +147,13 @@
 	function render() {
 		// 清楚画布
 		context.clearRect(0, 0, cw, ch);
+		console.log(curShowSeconds);
 		var hours = parseInt(curShowSeconds/3600),
 		// 小时是用差值的秒数除以3600秒，取整得到
 			minutes = parseInt((curShowSeconds - hours*3600)/60),
 		// 分钟是用差值减去小时所占的秒数，除以60秒，取整得到
 			seconds = curShowSeconds%60;
 		// 秒钟，直接处于60秒取余数就是秒数
-
-
 		// 绘制数字,是一个数字的分开的进行拼接起来的
 		// 画小时数字的第一个数字
 		renderDigital(leftDistance, topDistance, parseInt(hours/10));

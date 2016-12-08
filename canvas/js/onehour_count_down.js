@@ -14,7 +14,7 @@
 	// 元素距离左边距的距离
 		topDistance = Math.round(ch/5),
 	// 设置目标时间
-		endTime = new Date('2016/12/8, 14:58:00'),
+		endTime = new Date(),
 	// 当前时间显示的秒数
 		curShowSeconds = 0,
 	// 随机出现的小球的数组集合
@@ -27,7 +27,8 @@
 	// 注意此时设置的是Canvas的元素的宽高
 	canvas.width = cw;
 	canvas.height = ch;
-
+	// setTime和getTime得到的都是毫秒数，结束为1小时
+	endTime.setTime(endTime.getTime() + 3600*1000);
 	// 获取当前时间
 	curShowSeconds = getShowSeconds(); 
 
@@ -44,7 +45,7 @@
 	function getShowSeconds() {
 		var nowTime = new Date();
 		// 时间差,把毫秒数转为秒数
-		var ret = Math.round((endTime.getTime() - nowTime.getTime())/1000);
+		var ret = Math.round((endTime - nowTime.getTime())/1000);
 		// 判断这个时间差
 		return ret >= 0 ? ret : 0;
 	}
