@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>小球的只有落体运动</title>
+	<style type="text/css">
+	</style>
+</head>
+<body>
+		<canvas id="ball" width='600' height='600'></canvas>
+		<script src="js/requestAnimationFrame.js"></script>
+	<script>
+		;(function(){
+			var canvas = document.getElementById('ball');
+			// 不支持的浏览器直接不显示
+			if (!canvas || !canvas.getContext) {
+				alert("您的浏览器太旧了,升级您的浏览器");
+				return false;
+			}
+			var	context = canvas.getContext('2d'),
+				cw = canvas.width,
+				ch = canvas.height,
+				ball = {
+							x: 500, //小球的X坐标
+							y: 50, //小球的Y坐标
+							r: 20, //小球的半径
+							g: 1, //加速度
+							vx: -4, //x轴的方向的速度
+							vy: 0, //y轴的方向速度
+							color: '#005588'
+						};
+
+			function update() {
+				ball.x += ball.vx; //x轴的距离为开始的距离+小球的速度
+				ball.y += ball.vy; //y轴的距离为开始的距离+小球的速度
+				ball.vy += ball.g; //且Y轴的速度变化为开始的速度+加速度
+
+				// 对小球的边界区域进行判断，使得小球在区域内来回反弹
+				// 对下边界进行判断
+				if (ball.y >= ch - ball.r) {
+					// 当他超出y轴的边界后，回到最低点
+					ball.y = ch - ball.r;
+					// 其y轴的速度，变成开始速度的方向方向
+					ball.vy = -ball.vy*0.7
+					// 0.5是摩擦系数，因为小球不是每次都弹到最高点
+					// 会慢慢变为0;
+				}
+
+				// 上边界的判断
+				if (ball.y <= 0) {
+					ball.y = 0;
+					ball.vy = -ball.vy*0.7;
+				}
+
+				//左边界的判断
+				if (ball.x <= 0) {
+					ball.x = 0;
+					ball.vx = -ball.vx*0.7;
+				}
+
+				// 右边界的判断
+				if (ball.x >= cw-ball.r) {
+					ball.x = cw-ball.r;
+					ball.vx = -ball.vx*0.7;
+				}
+			}
+
+			function render() {
+				context.clearRect(0, 0, cw, ch);
+				context.strokeStyle = '#333';
+				context.lineWidth = 2;
+				context.strokeRect(0, 0, cw, ch);
+				context.fillStyle = ball.color;
+				context.beginPath();
+				context.arc(ball.x, ball.y, ball.r, 0, Math.PI*2, true);
+				context.closePath();
+				context.fill();
+			}
+
+			function init() {
+				render();
+				update();
+				window.requestAnimationFrame(init);
+			}
+
+			init();
+		})()
+	</script>
+</body>
+</html>
