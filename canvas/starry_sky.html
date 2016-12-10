@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>一片星空</title>
+	<style type="text/css">
+		#pentagram {
+			display: block;
+			margin: 0 auto;
+		}
+	</style>
+</head>
+<body>
+		<canvas id="pentagram"></canvas>
+	<script>
+		;(function(){
+			var canvas = document.getElementById('pentagram');
+			// 不支持的浏览器直接不显示
+			if (!canvas || !canvas.getContext) {
+				alert("您的浏览器太旧了,升级您的浏览器");
+				return false;
+			}
+			var	context = canvas.getContext('2d')
+				cw = 600,
+				ch = 600;
+				canvas.width = cw;
+				canvas.height = ch;	
+				context.fillStyle = 'black';
+				context.fillRect(0, 0, cw, ch);
+
+				context.fillStyle = 'red';
+				// 画很多五角星
+				for (var i = 0; i < 200; i++) {
+					var r = Math.random()*10 + 10,
+						x = Math.random()*cw,
+						y = Math.random()*ch;
+						rotate = Math.random()*360;
+					drawStar(x, y, r, r/2, rotate);
+					context.fill();
+				}
+
+				
+			// 封装为一个函数,rotate为旋转角度
+			function drawStar(x, y, R, r, rotate){
+				context.beginPath();
+				for (var i = 0; i < 5; i++) {
+					// 大圆起点
+					context.lineTo(Math.cos((18 + i*72-rotate)/180*Math.PI)*R + x, -Math.sin((18 + i*72-rotate)/180*Math.PI)*R + y);
+					// 小圆起点
+					context.lineTo(Math.cos((54 + i*72-rotate)/180*Math.PI)*r + x, -Math.sin((54 + i*72-rotate)/180*Math.PI)*r + y);
+				}
+				context.closePath();
+			}
+			
+		})()
+	</script>
+</body>
+</html>

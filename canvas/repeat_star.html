@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>重复的星星</title>
+	<style type="text/css">
+		#pentagram {
+			display: block;
+			margin: 0 auto;
+		}
+	</style>
+</head>
+<body>
+		<canvas id="pentagram"></canvas>
+	<script>
+		;(function(){
+			var canvas = document.getElementById('pentagram');
+			// 不支持的浏览器直接不显示
+			if (!canvas || !canvas.getContext) {
+				alert("您的浏览器太旧了,升级您的浏览器");
+				return false;
+			}
+			var	context = canvas.getContext('2d')
+				cw = 800,
+				ch = 800;
+				canvas.width = cw;
+				canvas.height = ch;	
+
+			var	backCanvas = backgroundStar();
+			var pat = context.createPattern(backCanvas, 'repeat');
+			context.fillStyle = pat;
+			context.fillRect(0, 0, cw, ch);
+
+				// 创建一个背景色的星星
+				function backgroundStar() {
+					var backCanvas = document.createElement('canvas');
+						backCanvas.width = 100,
+						backCanvas.height = 100,
+						backCanvasContext = backCanvas.getContext('2d');
+					drawStar(backCanvasContext, 50, 50, 2, 0);
+					return backCanvas;
+				}
+
+				// 画很多五角星函数
+				function drawStar(ctx,x, y, r, rotate) {
+					// 保存存档
+					ctx.save();
+					// 旋转x,y轴
+					ctx.translate(x, y);
+					// 旋转角度
+					ctx.rotate(rotate/180*Math.PI);
+					// 缩放
+					ctx.scale(r, r);
+
+					starPath(ctx);
+
+					// 样式
+					ctx.fillStyle = '#fb3';
+					ctx.strokeStyle = '#fd7';
+					ctx.lineWidth = 2;
+					ctx.lineJoin = 'round';
+
+					ctx.fill();
+					ctx.stroke();
+					// 取出存档
+					ctx.restore();
+				}
+
+			// 封装为一个函数,绘制一个标准的五角星，不要任何偏移和旋转
+			// 然后通过偏移和旋转来绘制其他五角星
+			function starPath(ctx){
+				ctx.beginPath();
+				for (var i = 0; i < 5; i++) {
+					// 大圆起点
+					ctx.lineTo(Math.cos((18 + i*72)/180*Math.PI)*10, -Math.sin((18 + i*72)/180*Math.PI)*10);
+					// 小圆起点
+					ctx.lineTo(Math.cos((54 + i*72)/180*Math.PI)*0.5*10, -Math.sin((54 + i*72)/180*Math.PI)*0.5*10);
+				}
+				ctx.closePath();
+			}
+			
+		})()
+	</script>
+</body>
+</html>

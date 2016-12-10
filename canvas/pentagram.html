@@ -22,6 +22,7 @@
 				context.lineWidth = 2;
 				context.strokeStyle = 'red';
 				drawStar(300, 100, cw/2, ch/2);
+				context.stroke();
 			// 封装为一个函数
 			function drawStar(R, r, x, y){
 				context.beginPath();
@@ -33,7 +34,7 @@
 				}
 				context.closePath();
 			}
-			context.stroke();
+		
 		})()
 	</script>
 </body>
