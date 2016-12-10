@@ -9,12 +9,12 @@
 	// 画布的宽高
 		cw = document.documentElement.clientWidth,
 		ch = document.documentElement.clientHeight,
-	// 元素距离上边距的距离,占整个屏幕的4/5，让整个Canvas标签
+	// 元素距离左边边距的距离,占整个屏幕的4/5，
 		leftDistance = Math.round(cw/10),
-	// 元素距离左边距的距离
+	// 元素距离上边距的距离，占整屏幕的1/5
 		topDistance = Math.round(ch/5),
 	// 设置目标时间
-		endTime = new Date('2016/12/8, 14:58:00'),
+		endTime = new Date('2016/12/10, 14:58:00'),
 	// 当前时间显示的秒数
 		curShowSeconds = 0,
 	// 随机出现的小球的数组集合

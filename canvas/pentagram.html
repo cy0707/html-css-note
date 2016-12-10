@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>五角星</title>
+</head>
+<body>
+		<canvas id="pentagram"></canvas>
+	<script>
+		;(function(){
+			var canvas = document.getElementById('pentagram');
+			// 不支持的浏览器直接不显示
+			if (!canvas || !canvas.getContext) {
+				alert("您的浏览器太旧了,升级您的浏览器");
+				return false;
+			}
+			var	context = canvas.getContext('2d')
+				cw = document.documentElement.clientWidth || document.body.clientWidth,
+				ch = document.documentElement.clientHeight || document.body.clientHeight;
+				canvas.width = cw-50;
+				canvas.height = ch-50;			
+				context.lineWidth = 2;
+				context.strokeStyle = 'red';
+				drawStar(300, 100, cw/2, ch/2);
+			// 封装为一个函数
+			function drawStar(R, r, x, y){
+				context.beginPath();
+				for (var i = 0; i < 5; i++) {
+					// 大圆起点
+					context.lineTo(Math.cos((18 + i*72)/180*Math.PI)*R + x, -Math.sin((18 + i*72)/180*Math.PI)*R + y);
+					// 小圆起点
+					context.lineTo(Math.cos((54 + i*72)/180*Math.PI)*r + x, -Math.sin((54 + i*72)/180*Math.PI)*r + y);
+				}
+				context.closePath();
+			}
+			context.stroke();
+		})()
+	</script>
+</body>
+</html>
