@@ -70,6 +70,8 @@
 	}
 	// 更新圆
 	function reDraw(event) {
+		// 清楚上一次所画的内容
+		ctx.clearRect(0, 0, cw, ch);
 		// 获取鼠标相对于canvas区域的左边和上边的距离
 		var x = event.clientX - canvas.getBoundingClientRect().left;
 		var y = event.clientY - canvas.getBoundingClientRect().top;
