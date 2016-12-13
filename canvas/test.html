@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh">
+ <head>
+ 	<meta charset="UTF-8">
+  <title>canvasMouseEvent</title>
+</head>
+<body>
+ <canvas id="tutorial" width="800" height="550"></canvas>
+   <script type="text/javascript">
+     window.onload = function() {
+        var canvas = document.getElementById('tutorial');
+        draw();
+        
+        canvas.onmousedown = function(e) {
+           e = e || event;
+           var x = e.clientX - canvas.offsetLeft;
+           var y = e.clientY - canvas.offsetTop;
+          if(currentC)
+             currentC.isCurrent = false;
+          currentC = null;
+          reDraw(e);
+          _e = e;
+          var showTimer = setInterval(function(e) {
+               reDraw(e);
+          }, 10, _e);
+          canvas.onmousemove = show;
+          document.onmouseup = function() {
+           if(currentC)
+             currentC.isCurrent = false;
+           currentC = null;
+           canvas.onmousemove = null;
+           clearInterval(showTimer);
+         }
+      }
+    }
+
+    var list = [];
+      var currentC;
+      var _e = {};
+      var cricle = function(x, y, r) {
+         this.x = x;
+         this.y = y;
+         this.r = r;
+         this.isCurrent = false;
+         this.drawC = function(ctx, x, y) {
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(this.x, this.y - this.r);
+            ctx.arc(this.x, this.y, this.r, 2 * Math.PI, 0, true);
+            if((x && y && ctx.isPointInPath(x, y) && !currentC ) || this.isCurrent) {
+               ctx.fillStyle = '#ff0000';
+               currentC = this;
+               this.isCurrent = true;
+            } else {
+               ctx.fillStyle = '#999999';
+            }
+            ctx.fill();
+         }
+       }
+        function draw() {
+           var canvas = document.getElementById('tutorial');
+           if(canvas.getContext) {
+             var ctx = canvas.getContext('2d');
+             for(var i = 0; i < 10; i++) {
+               var c = new cricle(20 * i, 20 * i, 5 * i);
+               c.drawC(ctx);
+               list.push(c);
+             }
+           }
+       }
+       function reDraw(e) {
+          e = e || event;
+          var canvas = document.getElementById('tutorial');
+          var x = e.clientX - canvas.offsetLeft;
+          var y = e.clientY - canvas.offsetTop;
+          canvas.width = canvas.width;
+          if(canvas.getContext) {
+             var ctx = canvas.getContext('2d');
+             for(var i = 0; i < list.length; i++) {
+                var c = list[i];
+                c.drawC(ctx, x, y);
+             }
+          }
+       }
+       function show(e) {
+         e = e || event;
+         var canvas = document.getElementById('tutorial');
+         var ctx = canvas.getContext('2d');
+         var x = e.clientX - canvas.offsetLeft;
+         var y = e.clientY - canvas.offsetTop;
+         if(currentC) {
+            currentC.x = parseInt(x + (x - currentC.x) / 5);
+            currentC.y = parseInt(y + (y - currentC.y) / 5);
+         }
+         _e = e;
+       }
+ </script>
+</body>
+</html>
