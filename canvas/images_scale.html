@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>图像的放大和缩小</title>
+	<style type="text/css">
+		body {
+			background-color: #000;
+		}
+		* {
+			padding: 0;
+			margin: 0;
+		}
+		#canavs {
+			display: block;
+			margin: 20px auto;
+			border: 1px solid #999;
+		}
+		input {
+			display: block;
+			margin: 20px auto;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canavs">
+		您的浏览器太旧了,不支持canvas标签，请升级您的浏览器
+	</canvas>
+	<input type="range" id="scale-range" min="0.5" max="3.0" step="0.01" value="1">
+	<script src="js/images_scale.js"></script>
+</body>
+</html>
