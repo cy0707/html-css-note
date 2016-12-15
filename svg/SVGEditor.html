@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>SVGEditor</title>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+		}
+		html, body {
+			width: 100%;
+			height: 100%;
+			font: 14px/1.6 'Microsoft YaHei';
+		}
+		.clearfix::after {
+			content: '';
+			height: 1px;
+			display: block;
+			visibility: hidden;
+			clear: both;
+		}
+		.editor-box {
+			width: 100%;
+			height: 100%;
+		}
+		.action-show {
+			float: left;
+			width: 100%;
+			height: 100%;
+			background-color: #f7f5f5;
+		}
+		.action-box {
+			position: absolute;
+			right: 0;
+			width: 240px;
+			height: 100%;
+			border-left: 1px solid #f7f7f7;
+			background-color: #fff;
+		}
+		.action-box h2 {
+			padding: 4px 0 4px 10px;
+			margin-bottom: 14px;
+			font-size: 16px;
+			border-bottom: 1px solid #edf3eb;			
+			color: #007fff;
+		}
+		.create {
+			padding-bottom: 14px;
+		}
+		.create button {
+			-webkit-appearance: none;
+			display: inline-block;
+			margin: 0 8px;
+			padding: 8px 4px;
+			color: #007fff;
+		    border: 1px solid #007fff;
+		    border-radius: 2px;
+		    background-color: transparent;
+		    cursor: pointer;		    
+		}
+		.action-box label{
+			display: block;
+			margin-bottom: 8px;
+			padding-left: 10px;
+			color: #949494;
+		}
+		.action-box input {
+			margin-left: 14px;
+		}
+	</style>
+</head>
+<body>	
+	<div class="editor-box clearfix">
+		<!-- 左侧展示 -->
+		<div class="action-show"></div>
+		<!-- 右侧操作 -->
+		<div class="action-box">
+			<h2>创建</h2>
+			<div class="create">
+				<button id='rect'>rect</button>
+				<button id="circle">circle</button>
+				<button id='ellipse'>ellipse</button>
+				<button id="line">line</button>
+			</div>
+			<h2>形状</h2>
+			<div class="create-shape"></div>
+			<h2>外观和变换</h2>
+			<label>填充<input type="color" ></label>
+			<label>描边<input type="color" ></label>
+			<label>描边大小<input type="range"></label>
+			<label>translateX<input type="range" ></label>
+			<label>translateY<input type="range" ></label>
+			<label>rotate<input type="range"></label>
+			<label>scale<input type="range"></label>
+		</div>
+	</div>
+	<script src='SVGEditor.js'></script>
+</body>
+</html>
