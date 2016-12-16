@@ -57,7 +57,12 @@
 		    border: 1px solid #007fff;
 		    border-radius: 2px;
 		    background-color: transparent;
+		    transition: all .6s;
 		    cursor: pointer;		    
+		}
+		.create button:hover {
+			color: #fff;
+			background-color: #007fff;
 		}
 		.action-box label{
 			display: block;
@@ -86,13 +91,17 @@
 			<h2>形状</h2>
 			<div class="create-shape"></div>
 			<h2>外观和变换</h2>
-			<label>填充<input type="color" ></label>
-			<label>描边<input type="color" ></label>
-			<label>描边大小<input type="range"></label>
-			<label>translateX<input type="range" ></label>
-			<label>translateY<input type="range" ></label>
-			<label>rotate<input type="range"></label>
-			<label>scale<input type="range"></label>
+			<div class="face">
+				<label>填充<input type="color" id="fill"></label>
+				<label>描边<input type="color" id="stroke"></label>
+				<label>描边大小<input type="range" id="stroke-width"></label>
+			</div>
+			<div class="transform">
+				<label>translateX<input type="range" id="translate-x"></label>
+				<label>translateY<input type="range" id="translate-y"></label>
+				<label>rotate<input type="range" id="rotate" min="0" max="360"></label>
+				<label>scale<input type="range" id="scale" min="-1" max="2" step="0.1"></label>
+			</div>
 		</div>
 	</div>
 	<script src='SVGEditor.js'></script>
