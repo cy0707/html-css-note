@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>SVGcolor</title>
+</head>
+<body>	
+<svg width="660" height="220">
+  <defs>
+    <pattern id="pattern-inner" x="2" y="2" width="6" height="6" patternUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="4" height="4" stroke="none" fill="black" />
+    </pattern>
+
+    <pattern id="pattern-outer" x="13" y="13" width="50" height="50" patternUnits="userSpaceOnUse">
+      <circle cx="22" cy="22" r="20" stroke="#900" stroke-width="4px" fill="url(#pattern-inner)" />
+    </pattern>
+  </defs>
+
+<rect x="10" y="10" width="600" height="200" stroke="#630" fill="url(#pattern-outer)" />
+</svg>
+</body>
+</html>

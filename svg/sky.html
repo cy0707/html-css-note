@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>一片星光</title>
+  <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      html, body {
+        background-color: #012;
+      }
+      svg {
+        display: block;
+      }
+  </style>
+</head>
+<body>	
+<!-- 对于负数的viewBox是通过放大后再移动的 -->
+<svg width="100%" height="100%" viewBox="-400 -200 800 400" preserveAspectRatio="xMidYMid slice">
+<!-- 星星的原型 -->
+  <defs>
+    <polygon id="star" points="0 -10,2 -2,10 0,2 2,0 10,-2 2,-10 0,-2 -2"></polygon>
+  </defs>
+  <!-- 真实的星空 -->
+  <g id="real" >
+      <!-- 星星的分组 -->
+      <g id="star-group"></g>
+      <!-- 月亮 -->
+      <g id="moon-group" transform="translate(0, -60)">
+        <mask id="moon-mask">
+            <circle cx="-200" cy="-30" r="80" fill="#fff"></circle>
+            <circle cx="-150" cy="-80" r="80" fill="#000"></circle>
+        </mask>
+        <circle cx="-200" cy="-30" r="80" fill="white" mask="url(#moon-mask)"></circle>
+      </g>
+      <!-- 灯塔 -->
+      <g id="light-tower" transform="translate(250, -50)">
+        <defs>
+          <!-- 塔的渐变，是线性渐变 -->
+            <linearGradient id="tower" x1="0" y1="0" x2="100%" y2="0">
+                <stop offset="0" stop-color="#999"></stop>
+                <stop offset="1" stop-color="#333"></stop>
+            </linearGradient>
+            <!-- 灯光的渐变，是径向渐变 -->
+            <radialGradient id="light" cx="0.5" cy="0.5" r="0.5">
+                <stop offset="0" stop-color="rgba(255, 255, 255, .8)"></stop>
+                <stop offset="1" stop-color="rgba(255, 255, 255, 0)"></stop>
+            </radialGradient>
+            <!-- 剪切标签 -->
+            <clipPath id="light-clip">
+                <polygon points="0 0 -400 -15 -400 15" fill="rgba(255, 0, 0, .5)">
+                  <!-- 动画 -->
+                  <animateTransform
+                    attributeName="transform"
+                    attributeType="XML"
+                    type="rotate"
+                    from="0"
+                    to="360"
+                    dur="10s"
+                    repeatCount="indefinite">
+                  </animateTransform>
+                </polygon>
+                <circle cx="0" cy="0" r="2"></circle>
+            </clipPath>
+        </defs>
+        <polygon points="0 0 5 50 -5 50" fill="url(#tower)"></polygon>
+        <!-- 光的范围 -->
+        <ellipse cx="0" cy="0" rx="300" ry="100" fill="url(#light)" clip-path="url(#light-clip)"></ellipse>
+        <!-- 使用剪切标签，只取相交的部分，且颜色是这个被剪切的颜色 -->
+      </g> 
+  </g>
+  <!-- 反射出来的 -->
+  <g id="reflect">
+    <defs>
+      <linearGradient id="fade" x1="0" y1="0" x2="0" y2="100%">
+        <stop offset="0" stop-color="rgba(0, 0, 0, .9)"></stop>
+        <stop offset="1" stop-color="rgba(0, 0, 0, .2)"></stop>
+      </linearGradient>
+    </defs>
+    <use xlink:href="#real" transform="scale(1,-1)"/>
+    <!-- 绘制蒙版 -->
+    <rect x="-400" y="0" width="800" height="200" fill="url(#fade)"></rect>
+  </g>
+  <!-- 参考线 -->
+  <!-- <line x1="-400" y1="0" x2="800" y2="0" stroke="#fff"></line> -->
+</svg>
+<script src="sky.js"></script>
+</body>
+</html>
