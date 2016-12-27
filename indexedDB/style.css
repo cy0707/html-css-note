@@ -1,0 +1,59 @@
+body {
+  font-size: 0.8em;
+  font-family: Sans-Serif;
+}
+
+form {
+  background-color: #cccccc;
+  border-radius: 0.3em;
+  display: inline-block;
+  margin-bottom: 0.5em;
+  padding: 1em;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+input {
+  padding: 0.3em;
+  border-color: #cccccc;
+  border-radius: 0.3em;
+}
+
+.required:after {
+  content: "*";
+  color: red;
+}
+
+.button-pane {
+  margin-top: 1em;
+}
+
+#documents-list {
+  background-color: #eeeeee;
+}
+
+.action-success {
+  margin-left: 1em;
+  padding: 0.5em;
+  color: #00d21e;
+  background-color: #eeeeee;
+  border-radius: 0.2em;
+}
+
+.action-failure {
+  margin-left: 1em;
+  padding: 0.5em;
+  color: #ff1408;
+  background-color: #eeeeee;
+  border-radius: 0.2em;
+}
+
+.presence-no {
+  font-style: italic;
+}
+
+.note {
+  font-size: smaller;
+}

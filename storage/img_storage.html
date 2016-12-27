@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>图片的本地存储</title>
+</head>
+<body>
+	<p>图片的本地存储</p>
+	<script type="text/javascript">
+	// 设置key
+		function set(key) {
+			var src = '1.png';
+			var img = document.createElement('img');
+			
+			// 给img添加事件
+			img.addEventListener('load',function(){
+				var imgCanvas = document.createElement('canvas'),
+					imgContext = imgCanvas.getContext('2d');
+				// 设置canvas的大小个图片一样大
+				imgCanvas.width = img.width;
+				imgCanvas.height = img.height;
+				// 将图片渲染在canvas中
+				imgContext.drawImage(this, 0, 0, this.width, this.height);
+				// 用dataurl的形式取出来
+				var imgDataURL = imgCanvas.toDataURL('image/png');
+				// 保存在本地存储中
+				try{
+					localStorage.setItem(key, imgDataURL);
+					}
+				catch(e){
+					console.log('storage failed: ' + e);	
+					}
+			}, false);
+			// 设置图片的地址
+			img.src = src;
+			// 从本地存储获取图片的地址并且渲染
+		}
+		//获取key值
+		function get(key) {
+			var scrStr = localStorage.getItem(key);
+			var imgObj = document.createElement('img');
+			imgObj.src = scrStr;
+			document.body.appendChild(imgObj);
+		}
+		// 可以在控制台输出测试
+		/*
+		set('text');
+		get('text');
+		*/
+	</script>
+</body>
+</html>

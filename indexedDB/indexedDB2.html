@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <link rel="stylesheet" href="style.css">
+ <script src="jquery-3.1.1.min.js"></script>
+</head>
+    <body>
+    <h1>IndexedDB Demo: storing blobs, e-publications example</h1>
+     <div id="msg">
+     </div>
+
+     <form id="register-form">
+       <table>
+         <tbody>
+           <tr>
+             <td>
+               <label for="pub-title" class="required">
+                 Title:
+               </label>
+             </td>
+             <td>
+               <input type="text" id="pub-title" name="pub-title" />
+             </td>
+           </tr>
+           <tr>
+             <td>
+               <label for="pub-year" class="required">
+                 Year:
+               </label>
+             </td>
+             <td>
+               <input type="number" id="pub-year" name="pub-year" />
+             </td>
+           </tr>
+           <tr>
+             <td>
+               <label for="pub-biblioid" class="required">
+                 Bibliographic ID
+                 <span class="note">(ISBN, ISSN, etc.)</span>:
+               </label>
+             </td>
+             <td>
+               <input type="text" id="pub-biblioid" name="pub-biblioid"/>
+             </td>
+           </tr>
+         </tbody>
+         <tbody>
+           <tr>
+             <td>
+               <label for="pub-file">
+                 File image:
+               </label>
+             </td>
+             <td>
+               <input type="file" id="pub-file" accept="image/*"/>
+             </td>
+           </tr>
+           <tr>
+             <td>
+               <label for="pub-content-url">
+                 Online-file image URL:
+               </label>
+             </td>
+             <td>
+               <input type="text" id="pub-content-url" name="pub-content-url"/>
+             </td>
+           </tr>
+         </tbody>
+       </table>
+
+       <div class="button-pane">
+         <input type="button" id="add-button" value="Add Publication" />
+         <input type="reset" id="register-form-reset"/>
+         <span id="action-status"></span>
+       </div>
+     </form>
+
+     <form id="delete-form">
+       <div>
+         <label for="pub-biblioid-to-delete" class="required">
+           Key (for example 1, 2, 3, etc.):
+         </label>
+         <input type="text" id="pub-biblioid-to-delete"
+                name="pub-biblioid-to-delete" />
+       </div>
+       <div class="button-pane">
+         <input type="button" id="delete-button" value="Delete Publication" />
+       </div>
+     </form>
+
+     <form id="search-form">
+       <div class="button-pane">
+         <input type="button" id="search-list-button"
+                value="List database content" />
+       </div>
+     </form>
+
+     <div>
+       <div id="pub-msg">
+       </div>
+       <ul id="pub-list">
+       </ul>
+     </div>
+     <script src="indexedDB.js"></script>
+    </body>
+</html>

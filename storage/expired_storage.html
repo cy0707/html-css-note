@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>存储过期的设置</title>
+</head>
+<body>
+	<p>存储过期的设置</p>
+	<script type="text/javascript">
+	// 设置key
+		function set(key, v) {
+			// 得到当前事件的毫秒数
+			var curTime = new Date().getTime();
+			// 存储
+			localStorage.setItem(key, JSON.stringify({data: v,time: curTime}));
+		}
+		//获取key值
+		function get(key, exp) {
+			var data = localStorage.getItem(key);
+			// 把JSON字符串转为对象
+			var dataObj = JSON.parse(data);
+			// 如果设置现在取得的时间减去设置的时间大于
+			// 设置的过期时间的话，那么时间已经过期了
+			if (new Date().getTime() - dataObj.time > exp) {
+				console.log('expired');
+			}else {
+				console.log('data= ' + dataObj.data);
+			}
+		}
+		// 可以在控制台输出测试
+		/*
+		set('text', 'xxxxxx');
+		get('text',2000000);
+		*/
+	</script>
+</body>
+</html>
