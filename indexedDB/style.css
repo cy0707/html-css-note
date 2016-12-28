@@ -1,14 +1,23 @@
 body {
   font-size: 0.8em;
   font-family: Sans-Serif;
+  max-width: 960px;
+  margin: 0 auto;
+  background-color: #f4f5f5;
+}
+.box {
+  margin-top: 20px;
+  background-color: #fff;
+  padding: 40px;
 }
 
 form {
-  background-color: #cccccc;
+  background-color: #fff;
   border-radius: 0.3em;
-  display: inline-block;
   margin-bottom: 0.5em;
   padding: 1em;
+  border: 1px solid #eaeaea;
+  box-shadow: 0 .2em .5em 0 rgba(0,0,0,.1);
 }
 
 table {
@@ -16,9 +25,9 @@ table {
 }
 
 input {
+  border: 1px solid #eaeaea;
   padding: 0.3em;
-  border-color: #cccccc;
-  border-radius: 0.3em;
+  border-radius: 0.2em;
 }
 
 .required:after {
@@ -56,4 +65,10 @@ input {
 
 .note {
   font-size: smaller;
+}
+input[type="button"],
+input[type="reset"]{
+  border: none;
+  color: #fff;
+  background-color: #007fff;
 }
