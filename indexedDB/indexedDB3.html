@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <link rel="stylesheet" href="style.css">
+</head>
+    <body>
+    <div class="box">
+      <h2>indexedDB的小练习</h2>
+      <!-- 添加删除查询 -->
+      <div class="search-box">
+        <label>姓名<input type="text" id="name"></label>
+        <label>电话<input type="number" id="phone"></label>
+        <label>地址<input type="text" id="address"></label>
+        <button id="add">添加</button>
+        <button id="deleteDB">删除数据库</button>
+        <label>姓名<input type="text" id="search-name"></label>
+        <button id="search">查询</button>
+      </div>
+      <!-- 结果展示 -->
+      <table class="search-result">
+        <thead>
+           <tr>
+              <th>姓名</th>
+              <th>电话</th>
+              <th>地址</th>
+              <th>删除</th>
+            </tr>  
+          </thead>
+        <tbody id="content"></tbody>
+      </table>
+    </div>
+
+    <script src="indexedDB2.js"></script>
+    </body>
+</html>
