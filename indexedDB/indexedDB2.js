@@ -33,7 +33,7 @@
 
     // 数据库打开失败
     openRequest.onerror = function(e) {
-
+      console.log(event.target.errorCode);
     };
 
 
