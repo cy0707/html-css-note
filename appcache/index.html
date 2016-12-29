@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" manifest="sample.appcache">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="style.css">
+	<script src="demo.js"></script>
+	<title>html5离线缓存</title>
+</head>
+<body>
+	<p>html5离线缓存</p>
+	<img src="1.png" alt="我是一张图片">
+	<img src="2.png" alt="我是一张图片">
+	<script type="text/javascript">
+		window.addEventListener('load', function(e) {  
+		    window.applicationCache.addEventListener('updateready', function(e) { 
+		        //缓存更新完毕 
+		        if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {  
+		            //切换为最新缓存
+		            window.applicationCache.swapCache();  
+		            if (confirm('新版本已经更新完成，是否重新加载?')) {  
+		                window.location.reload();  
+		            }  
+		        }else{
+		        	console.log('manifest文件没有改变');
+		        }  
+		    }, false);  
+		}, false);  
+	</script>
+</body>
+</html>

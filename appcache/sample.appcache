@@ -1,0 +1,14 @@
+CACHE MANIFEST
+#version 1.2
+
+CACHE:
+style.css
+1.png
+2.png
+demo.js
+
+NETWORK:
+*
+
+FALLBACK:
+404.html
