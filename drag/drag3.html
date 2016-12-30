@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>drag的小例子</title>
+	<style type="text/css">
+		body {
+			width: 960px;
+			margin: 40px auto;
+		}
+		.dustbin {
+			width: 100%;
+			height: 140px;
+			line-height: 140px;
+			font-size: 16px;
+			text-align: center;
+			color: #fff;
+			background-color: #b3b6bb;
+		}
+		.draglist {
+			padding: 10px 24px;
+			display: inline-block;
+			background-color: #38f;
+			color: #fff;
+		}
+	</style>
+</head>
+<body>
+	<!-- 可拖动元素 -->
+	<div class="dragbox">
+	    <div class="draglist" title="拖拽我" draggable="true">垃圾1</div>
+	    <div class="draglist" title="拖拽我" draggable="true">垃圾2</div>
+	    <div class="draglist" title="拖拽我" draggable="true">垃圾3</div>
+	    <div class="draglist" title="拖拽我" draggable="true">垃圾4</div>
+	    <div class="draglist" title="拖拽我" draggable="true">垃圾5</div>
+	    <div class="draglist" title="拖拽我" draggable="true">垃圾6</div>
+	</div>
+	<!-- 垃圾箱 -->
+	<div class="dustbin">我是垃圾箱,把垃圾都扔给我把！！！</div>
+	<script>
+		(function(){
+
+			// 获取元素
+			var dustbin = document.querySelector('.dustbin'),
+				dragbox = document.querySelector('.dragbox'),
+				dargEleList = document.querySelectorAll('.draglist'),
+				dragEle;
+			
+			for (var i = 0; i < dargEleList.length; i++) {
+				// 拖拽开始
+				dargEleList[i].addEventListener('dragstart',function(e){
+					e.dataTransfer.setData('text/plain', this.innerHTML);
+					e.dataTransfer.effectAllow = 'move';
+					// 拖拽元素为当前元素
+					dragEle = this;
+				},false);
+
+				// 拖拽结束
+				dargEleList[i].addEventListener('dragend',function(e){
+					this.style.backgroundColor = '#' + (~~(Math.random()*(1<<24))).toString(16);
+					// 把当前元素清空
+					dragEle = null;
+				},false);
+			}
+
+
+			// 拖拽进行目标元素
+			dustbin.addEventListener('dragenter',function(e){
+				this.style.backgroundColor = '#' + (~~(Math.random()*(1<<24))).toString(16);
+				dustbin.innerHTML = '垃圾垃圾你快来';
+			},false);
+			// 拖拽进行离开目标元素
+			dustbin.addEventListener('dragleave',function(e){
+				this.style.backgroundColor = '#' + (~~(Math.random()*(1<<24))).toString(16);
+				dustbin.innerHTML = '垃圾垃圾你别走';
+			},false);
+			// 拖拽进行在目标元素中移动
+			dustbin.addEventListener('dragover',function(e){
+				e.preventDefault();
+			},false);
+			// 拖拽放置在目标元素
+			dustbin.addEventListener('drop',function(e){
+				e.preventDefault();
+				// 如果拖拽元素存在
+				if (dragEle) {
+					dragbox.removeChild(dragEle);
+					dustbin.innerHTML = '收到一条垃圾' + dragEle.innerHTML;
+				}
+			},false);
+
+		})();
+	</script>
+</body>
+</html>

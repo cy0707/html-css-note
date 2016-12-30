@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>选择器</title>
+</head>
+<body>
+<div draggable="true" ondragstart="dragWithCustomImage(event);">
+  This text <strong>may</strong> be dragged.
+  <script type="text/javascript">
+  	function dragWithCustomImage(event)
+  	{
+  	  var canvas = document.createElementNS("http://www.w3.org/1999/xhtml","html:canvas");
+  	  canvas.width = canvas.height = 50;
+
+  	  var ctx = canvas.getContext("2d");
+  	  ctx.lineWidth = 4;
+  	  ctx.moveTo(0, 0);
+  	  ctx.lineTo(50, 50);
+  	  ctx.moveTo(0, 50);
+  	  ctx.lineTo(50, 0);
+  	  ctx.stroke();
+
+  	  var dt = event.dataTransfer;
+  	  dt.setData('text/plain', 'Data to Drag');
+  	  dt.effectAllowed = "move";
+  	  dt.setDragImage(canvas, 25, 25);
+  	}
+  </script>
+</div>
+</body>
+</html>
