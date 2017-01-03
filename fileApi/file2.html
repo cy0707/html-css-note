@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>拖拽上传图片</title>
+  <style type="text/css">
+    body {
+      padding-top: 50px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .dropbox {
+      margin-top: 20px;
+      width: 600px;
+      height: 300px;
+      color: #666;
+      text-align: center;
+      background-color: #ddd;
+    }
+    .add-img {
+      max-width: 40px;
+      height: auto;
+      margin-right: 20px;
+    }
+  </style>
+</head>
+<body>
+<input type="file" id="file" style="display: none" accept="image/*" multiple >
+<div class="dropbox" id="dropbox">拖到/点我上传图片</div>
+<script src="file.js"></script>
+</body>
+</html>
