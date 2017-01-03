@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+<title>桌面通知</title>
+</head>
+<p>点击确认通知，看看发生了什么....</p>
+<script type="text/javascript">
+function showmsg() {
+    // 位于桌面左下角的通知，类型桌面应用
+    mynotify = new Notification("会议提醒", {
+        body: '您计划于今天下午4点召开全体会议，请准时参加',
+        icon: 'http://q4.qlogo.cn/g?b=qq&k=icUjVAN5Ja7BCDQ1ICl8Svw&s=40',
+        tag: 1
+    });
+    // 通知显示的时候执行的函数
+    mynotify.onshow = function() {
+        setTimeout(function() {
+            mynotify.close();
+        }, 5000);
+    }
+    // 点击这个通知，执行的函数
+    mynotify.onclick = function() {
+        window.location.href = "https://github.com/cy0707";
+    }
+    // 通知在桌面左下消失的时候，浏览器页面的执行的函数
+    mynotify.onclose = function() {
+        //可以在这里做一些有意义的事情，比如记录显示通知的次数
+        document.write('哈哈哈....你的浏览器还不赖哦');
+    }
+}
+
+//判断浏览器是否支持桌面通知
+if (!!window.Notification) {
+    var notification = window.Notification;
+    var mynotify;
+    if (notification.permission == "granted") {
+        //创建通知
+        showmsg();
+    }
+    //判断许可状态
+    else if (notification.permission == "default") {
+        /*
+        如果用户从未设置过此网站的桌面提醒状态(可能是第一次访问这个网站，或者以前允许过，但是在通知-例外中删除掉了)，则调用requestPermission方法，让用户选择是否允许桌面提醒
+        */
+        notification.requestPermission(function(permission) {
+            //在回掉函数中判断用户的选择,在这里不用为“拒绝”选项编写代码，因为既然拒绝，就什么都不做了，也不用为默认状态编写代码，因为既然已经弹出让用户选择的选项了，就没有所谓的默认状态了。所以只需要处理用户允许的状态就可以了
+            if (permission == "granted") {
+                //创建通知
+                showmsg();
+            }
+        });
+    }
+}else {
+    alert("很抱歉，您的浏览器并不支持通知消息");
+}
+</script>
+</body>
+</html>
