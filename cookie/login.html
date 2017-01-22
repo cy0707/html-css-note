@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+		}
+		html, body {
+			width: 100%;
+			height: 100%;
+		}
+		body {
+			font: 16px/1.6 'Microsoft Yahei';
+			background-color: #e5e5e5;
+		}
+		.box {
+			max-width: 960px;
+		    margin: 40px auto 0;
+		    padding: 80px 20px;
+		    background-color: #fff;
+		    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .1);
+		}
+		label {
+			display: block;
+			margin-bottom: 20px;
+		}
+		h2 {
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<h2>记住密码和账号demo</h2>
+		<label>用户名：<input type="text" id="user"></label>
+		<label>密码：<input type="password" id="psw"></label>
+		<input type="checkbox" id="check">记住用户 
+		<button id="enter">登陆</button>
+	</div>
+	<script src="cookie.js"></script>
+	<script>
+		(function(){
+			// cookie的设置相同的时候，前面的会覆盖后面的值
+			var user = document.getElementById('user'),
+				psw = document.getElementById('psw'),
+				check = document.getElementById('check'),
+				enter = document.getElementById('enter');
+			
+			// 刚开始的时候，从cookie从取值，记住密码
+			if (CookieUtil.get("un")  && CookieUtil.get("pv") && CookieUtil.get("ck")) {
+				user.value = CookieUtil.get("un");
+				psw.value = CookieUtil.get("pv");
+				check.setAttribute('checked', 'checked');
+			}
+
+			// 点击登陆时，如果要记住用户的话
+			enter.addEventListener('click',function(){
+				if (check.checked) {
+					var userName = user.value,
+						pswValue = psw.value;
+					// 把获取到的用户名和密码存在cookie中，下次
+					// 直接从cookie中取出来
+					CookieUtil.set("un", userName);
+					CookieUtil.set("pv", pswValue);
+					CookieUtil.set("ck", "true");
+					// 先从cookie中比对，cookie中，如果有的话，直接登陆
+					if (CookieUtil.get("un") === userName && CookieUtil.get("pv") === pswValue ) {
+						alert('恭喜，登陆成功');
+					}else {
+						alert('密码和用户名错误');	
+					}
+				}
+			}, false);
+
+		})();
+	</script>
+</body>
+</html>
