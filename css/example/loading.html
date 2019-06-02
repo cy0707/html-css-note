@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>感叹号、对勾和loading</title>
+	<style type="text/css">
+	* {
+	    padding: 0;
+	    margin: 0;
+	}
+	html, body {
+		font: 14px/1.6 'Microsoft YaHei';
+		max-width: 1200px;
+		margin: 0 auto;
+		padding-top: 40px;
+	}
+	/*感叹号*/
+	.mark::before {
+		content: '';
+		display: block;
+		width: 4px;
+		height: 16px;
+		margin-top: 8px;
+		margin-left: 17px;
+		margin-bottom: 2px;
+		background-color: #ccc;
+	}
+	.mark::after {
+		content: '';
+		display: block;
+		width: 4px;
+		height: 6px;
+		margin-left: 17px;
+		background-color: #ccc;
+	}
+
+	/*对勾*/
+	.correct, .mark {
+		margin-top: 20px;
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		border: 2px solid #ccc;
+	}
+	.correct::after {
+		content: '';
+		display: block;
+		width: 28px;
+		height: 16px;
+		margin-top: 6px;
+		margin-left: 4px;
+		border: 2px solid #ccc;
+		border-width: 0 0 2px 2px;
+		-webkit-transform: rotate(-45deg);
+		transform: rotate(-45deg);
+	}
+	/*小球来回运动的loading动画*/
+	.loading {
+		margin-top: 20px;
+	}
+	@-webkit-keyframes waiting1 {
+		0% {
+			transform: translate(-5px, 0);
+		}
+		50% {
+			transform: translate(10px, 0);
+		}
+		100% {
+			transform: translate(-5px, 0);
+		}
+	}
+	@-webkit-keyframes waiting2 {
+		0% {
+			transform: translate(5px, 0);
+		}
+		50% {
+			transform: translate(-10px, 0);
+		}
+		100% {
+			transform: translate(5px, 0);
+		}
+	}
+	
+	.loading::before{
+		content: '';
+		display: inline-block;
+		width: 10px;
+		height: 10px;
+		border-radius: 50%;
+		background-color: #3385ff;
+		-webkit-animation: waiting1 .8s infinite;
+	}
+	.loading::after{
+		content: '';
+		display: inline-block;
+		width: 10px;
+		height: 10px;
+		border-radius: 50%;
+		background-color: #c00;
+		-webkit-animation: waiting2 .8s infinite;
+	}
+	
+</style>
+</head>
+
+<body>
+	<!-- 感叹号 -->
+	<div class="mark"></div>
+	<!-- 对勾 -->
+	<div class="correct"></div>
+	<!-- 三个小球的loading -->
+	<div class="loading"></div>
+</body>
+
+</html>

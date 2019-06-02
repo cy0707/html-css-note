@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>模拟原生的checkbox</title>
+	<style type="text/css">
+		.container {
+			max-width: 960px;
+			width: 100%;
+		}
+		/*模拟checkbox*/
+		.checkbtn {
+		    position: relative;
+		    width: 46px;
+		    height: 111px;
+		}
+		.checkbtn input {
+		    position: absolute;
+		/*z-index的层级来提高，input来点击*/
+		    z-index: 10;
+		    width: 100%;
+		    height: 111px;
+		/*注意这里是通过改变透明度，inputy隐藏起来*/
+		    opacity: 0; 
+		    cursor: pointer;  
+		}
+		.icon-checked {
+		    position: absolute;
+		    left: 0;
+		    right: 0;
+		    top: 0;
+		    bottom: 0;
+		    margin: auto;
+		    width:22px;
+		    height:22px;
+		    vertical-align:bottom;
+		    background-image: url(images/no_checked.png);
+		    background-size: cover;
+		}
+		/*通过css选择器来改变check的图片*/
+		.check:checked+.icon-checked {
+		    background-image: url(images/checked.png);
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="checkbtn">
+		     <input class="check" type="checkbox" checked="checked">
+		     <i class="icon-checked"></i>
+		</div>
+	</div>
+</body>
+</html>		

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>照片墙</title>
+	<style type="text/css">
+		* {
+			padding: 0;
+			margin: 0;
+		}
+		img {
+			border: 0;
+		}
+		.container {
+			position: relative;
+			max-width: 960px;
+			width: 100%;
+			margin: 40px auto;
+		}
+		.container img{
+			position: absolute;
+			z-index: 1;
+			width: 300px;
+			height: auto;
+			padding: 10px;
+			background-color: #fff;
+			border: 1px solid #ccc;
+			-webkit-transition: all 0.8s;
+		    -moz-transition: all 0.8s;
+		    -ms-transition: all 0.8s;
+		    -o-transition: all 0.8s;
+		    transition: all 0.8s;
+		}
+		.container img:first-child{
+			-webkit-transform: rotate(-10deg);
+		    -moz-transform: rotate(-10deg);
+		    -ms-transform: rotate(-10deg);
+		    -o-transform: rotate(-10deg);
+		    transform: rotate(-10deg);
+		}
+		.container img:nth-child(2){
+			-webkit-transform: rotate(10deg);
+		    -moz-transform: rotate(10deg);
+		    -ms-transform: rotate(10deg);
+		    -o-transform: rotate(10deg);
+		    transform: rotate(10deg);
+			left: 200px;
+		}
+		.container img:nth-child(3){
+			-webkit-transform: rotate(-14deg);
+		    -moz-transform: rotate(-14deg);
+		    -ms-transform: rotate(-14deg);
+		    -o-transform: rotate(-14deg);
+		    transform: rotate(-14deg);
+			left: 400px;
+		}
+		.container img:nth-child(4){
+			-webkit-transform: rotate(20deg);
+		    -moz-transform: rotate(20deg);
+		    -ms-transform: rotate(20deg);
+		    -o-transform: rotate(20deg);
+		    transform: rotate(20deg);
+			left: 600px;
+		}
+		.container img:nth-child(5){
+			left: 0;
+			top: 400px;
+			-webkit-transform: rotate(-20deg);
+		    -moz-transform: rotate(-20deg);
+		    -ms-transform: rotate(-20deg);
+		    -o-transform: rotate(-20deg);
+		    transform: rotate(-20deg);
+		}
+		.container img:nth-child(6){
+			top: 400px;
+			left: 200px;
+			-webkit-transform: rotate(24deg);
+		    -moz-transform: rotate(24deg);
+		    -ms-transform: rotate(24deg);
+		    -o-transform: rotate(24deg);
+		    transform: rotate(24deg);
+
+		}
+		.container img:nth-child(7){
+			top: 400px;
+			left: 400px;
+			-webkit-transform: rotate(-16deg);
+		    -moz-transform: rotate(-16deg);
+		    -ms-transform: rotate(-16deg);
+		    -o-transform: rotate(-16deg);
+		    transform: rotate(-16deg);
+		}
+		.container img:nth-child(8){
+			top: 400px;
+			left: 600px;
+			-webkit-transform: rotate(30deg);
+		    -moz-transform: rotate(30deg);
+		    -ms-transform: rotate(30deg);
+		    -o-transform: rotate(30deg);
+		    transform: rotate(30deg);
+
+		}
+		.container img:hover {
+			/*对于transform的多个变换函数用空格分开*/
+			/*对于transition的多个属性的效果用逗号分开*/
+			-webkit-transform:scale(1.1) rotate(0deg);
+		    -moz-transform:scale(1.1) rotate(0deg);
+		    -ms-transform:scale(1.1) rotate(0deg);
+		    -o-transform:scale(1.1) rotate(0deg);
+		    transform:scale(1.1) rotate(0deg);
+		    -webkit-box-shadow: 1px 1px 10px rgba(0, 0, 0, .4);
+		    -moz-box-shadow: 1px 1px 10px rgba(0, 0, 0, .4);
+		    -ms-transform: 1px 1px 10px rgba(0, 0, 0, .4);
+		    -o-transform: 1px 1px 10px rgba(0, 0, 0, .4);
+		    box-shadow: 1px 1px 10px rgba(0, 0, 0, .4);
+		    z-index: 2;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<img src="images/1.jpg" alt="">
+		<img src="images/2.jpg" alt="">
+		<img src="images/3.jpg" alt="">
+		<img src="images/4.jpg" alt="">
+		<img src="images/5.jpg" alt="">
+		<img src="images/6.jpg" alt="">
+		<img src="images/7.jpg" alt="">
+		<img src="images/8.jpg" alt="">
+	</div>
+</body>
+</html>		

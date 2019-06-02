@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>3d的translate</title>
+	<style type="text/css">
+		* {
+			padding: 0;
+			margin: 0;
+		}
+		img {
+			border: 0;
+		}
+		.box {
+			position: relative;
+			float: left;
+			width: 500px;
+			height: 500px;
+			margin: 15px;
+			/*离浏览器的屏幕的距离
+			父节点设置perspective
+			*/
+			-webkit-perspective: 1200px;
+			-moz-perspective: 1200px;
+		    -ms-perspective: 1200px;
+		     -o-perspective: 1200px;
+			    perspective: 1200px;
+		}
+		.container {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			/*指定嵌套元素如何在3D空间中呈现。他主要有两个属性值：flat和preserve-3d。
+				其作用于子元素
+			*/
+
+			-webkit-transform-style: preserve-3d;
+			-moz-transform-style: preserve-3d;
+		    -ms-transform-style: preserve-3d;
+		     -o-transform-style: preserve-3d;
+			    transform-style: preserve-3d;	
+		}
+		.container img {
+			position: absolute;
+			width: 200px;
+			height: 300px;
+			/*让图片居中在中心*/
+			margin-left: -100px;
+			margin-top: -150px;
+		}
+		.container img:first-child{
+			z-index: 1;
+			opacity: .4;
+		}
+		.box1 img:last-child{
+			z-index: 2;
+			-webkit-transform: translate3d(30px, 30px, 200px);
+			-moz-transform: translate3d(30px, 30px, 200px);
+		    -ms-transform: translate3d(30px, 30px, 200px);
+		     -o-transform: translate3d(30px, 30px, 200px);
+			    transform: translate3d(30px, 30px, 200px);	
+		}
+		.box2 img:last-child{
+			z-index: 2;
+			-webkit-transform: translate3d(30px, 30px, -200px);
+			-moz-transform: translate3d(30px, 30px, -200px);
+		    -ms-transform: translate3d(30px, 30px, -200px);
+		     -o-transform: translate3d(30px, 30px, -200px);
+			    transform: translate3d(30px, 30px, -200px);	
+		}
+	</style>
+</head>
+<body>
+	<div class="box box1">
+		<div class="container">
+			<img src="images/3.jpg" alt="">
+			<img src="images/3.jpg" alt="">
+		</div>
+	</div>
+	<div class="box box2">
+		<div class="container">
+			<img src="images/3.jpg" alt="">
+			<img src="images/3.jpg" alt="">
+		</div>
+	</div>
+	<p>从上图的效果可以看出，当z轴值越大时，元素也离观看者更近，从视觉上元素就变得更大；反之其值越小时，元素也离观看者更远，从视觉上元素就变得更小。</p>
+</body>
+</html>		

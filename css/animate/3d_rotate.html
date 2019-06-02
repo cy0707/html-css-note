@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>3d的scale</title>
+	<style type="text/css">
+		* {
+			padding: 0;
+			margin: 0;
+		}
+		img {
+			border: 0;
+		}
+		.box {
+			position: relative;
+			float: left;
+			width: 500px;
+			height: 500px;
+			margin: 15px;
+			/*离浏览器的屏幕的距离
+			父节点设置perspective
+			*/
+			-webkit-perspective: 1200px;
+			-moz-perspective: 1200px;
+		    -ms-perspective: 1200px;
+		     -o-perspective: 1200px;
+			    perspective: 1200px;
+		}
+		.container {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			/*指定嵌套元素如何在3D空间中呈现。他主要有两个属性值：flat和preserve-3d。
+				其作用于子元素
+			*/
+
+			-webkit-transform-style: preserve-3d;
+			-moz-transform-style: preserve-3d;
+		    -ms-transform-style: preserve-3d;
+		     -o-transform-style: preserve-3d;
+			    transform-style: preserve-3d;	
+		}
+		.container img {
+			position: absolute;
+			width: 200px;
+			height: 300px;
+			/*让图片居中在中心*/
+			margin-left: -100px;
+			margin-top: -150px;
+		}
+		.container img:first-child{
+			z-index: 1;
+			opacity: .2;
+		}
+		.box1 img:last-child{
+			z-index: 2;
+			-webkit-transform: rotateX(45deg);
+			-moz-transform: rotateX(45deg);
+		    -ms-transform: rotateX(45deg);
+		     -o-transform: rotateX(45deg);
+			    transform: rotateX(45deg);
+		}
+		.box2 img:last-child{
+			z-index: 2;
+			-webkit-transform: rotateY(45deg);
+			-moz-transform: rotateY(45deg);
+		    -ms-transform: rotateY(45deg);
+		     -o-transform: rotateY(45deg);
+			    transform: rotateY(45deg);
+		}
+		.box3 img:last-child{
+			z-index: 2;
+			-webkit-transform: rotateZ(45deg);
+			-moz-transform: rotateZ(45deg);
+		    -ms-transform: rotateZ(45deg);
+		     -o-transform: rotateZ(45deg);
+			    transform: 	rotateZ(45deg);
+		}
+		.box4 img:last-child{
+			z-index: 2;
+			-webkit-transform: rotate3d(.6, 1, .6, 45deg);
+			-moz-transform: rotate3d(.6, 1, .6, 45deg);
+		    -ms-transform: rotate3d(.6, 1, .6, 45deg);
+		     -o-transform: rotate3d(.6, 1, .6, 45deg);
+			    transform:  rotate3d(.6, 1, .6, 45deg);
+		}
+	</style>
+</head>
+<body>
+	<div class="box box1">
+		<div class="container">
+			<img src="images/5.jpg" alt="">
+			<img src="images/5.jpg" alt="">
+		</div>
+	</div>
+	<div class="box box2">
+		<div class="container">
+			<img src="images/5.jpg" alt="">
+			<img src="images/5.jpg" alt="">
+		</div>
+	</div>
+	<div class="box box3">
+		<div class="container">
+			<img src="images/5.jpg" alt="">
+			<img src="images/5.jpg" alt="">
+		</div>
+	</div>
+	<div class="box box4">
+		<div class="container">
+			<img src="images/5.jpg" alt="">
+			<img src="images/5.jpg" alt="">
+		</div>
+	</div>
+	<p>使用rotateX()函数允许一个元素围绕X轴旋转；rotateY()函数允许一个元素围绕Y轴旋转；最后rotateZ()函数允许一个元素围绕Z轴旋转。</p>
+</body>
+</html>		

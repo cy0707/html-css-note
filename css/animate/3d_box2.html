@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>使用多个2D变形，制作的一个3D立方体</title>
+	<style type="text/css">
+		* {
+			padding: 0;
+			margin: 0;
+		}
+		.stage {
+			position: relative;
+			float: left;
+			width: 300px;
+			height: 300px;
+			margin: 50px;
+			-webkit-perspective: 1200px;
+			   -moz-perspective: 1200px;
+			    -ms-perspective: 1200px;
+			     -o-perspective: 1200px;
+			        perspective: 1200px;
+		}
+		.container {
+			position: relative;
+			width: 100px;
+			height: 230px;
+			top: 50%;
+			left: 50%;
+			margin: -100px 0 0 -50px;
+			-webkit-transform-style: preserve-3d;
+			   -moz-transform-style: preserve-3d;
+			    -ms-transform-style: preserve-3d;
+			     -o-transform-style: preserve-3d;
+			        transform-style: preserve-3d;
+		}
+		.container:hover {
+			-webkit-animation: spin 5s linear infinite;
+			-moz-animation: spin 5s linear infinite;
+			-ms-animation: spin 5s linear infinite;
+			-o-animation: spin 5s linear infinite;
+			animation: spin 5s linear infinite;
+		}
+		/*动画*/
+		@-webkit-keyframes spin {
+			from {
+				-webkit-transform: rotateY(0deg);
+			}
+			to {
+				-webkit-transform: rotateY(360deg);
+			}
+		}
+		@-moz-keyframes spin {
+			from {
+				-moz-transform: rotateY(0deg);
+			}
+			to {
+				-moz-transform: rotateY(360deg);
+			}
+		}
+		@-ms-keyframes spin {
+			from {
+				-ms-transform: rotateY(0deg);
+			}
+			to {
+				-ms-transform: rotateY(360deg);
+			}
+		}
+		@-o-keyframes spin {
+			from {
+				-o-transform: rotateY(0deg);
+			}
+			to {
+				-o-transform: rotateY(360deg);
+			}
+		}
+		.side {
+			position: absolute;
+			font-size: 60px;
+			line-height: 196px;
+			height: 196px;
+			width: 196px;
+			font-weight: bold;
+			color: #fff;
+			text-align: center;
+			text-shadow: 0 -1px 0 rgba(0, 0, 0, .2);
+			text-transform: uppercase;
+			background-color: rgba(142, 198, 63, .3);
+			border: 2px solid #8ec63f;
+		}
+		/*六面体*/
+		.front {
+			-webkit-transform: translateZ(100px);
+			   -moz-transform: translateZ(100px);
+			    -ms-transform: translateZ(100px);
+			     -o-transform: translateZ(100px);
+			        transform: translateZ(100px);
+		}
+		.back {
+			-webkit-transform: rotateX(180deg) translateZ(100px);
+			   -moz-transform: rotateX(180deg) translateZ(100px);
+			    -ms-transform: rotateX(180deg) translateZ(100px);
+			     -o-transform: rotateX(180deg) translateZ(100px);
+			        transform: rotateX(180deg) translateZ(100px);
+		}
+		.top {
+			-webkit-transform: rotateX(90deg) translateZ(100px);
+			   -moz-transform: rotateX(90deg) translateZ(100px);
+			    -ms-transform: rotateX(90deg) translateZ(100px);
+			     -o-transform: rotateX(90deg) translateZ(100px);
+			        transform: rotateX(90deg) translateZ(100px);
+		}
+		.bottom {
+			-webkit-transform: rotateX(-90deg) translateZ(100px);
+			   -moz-transform: rotateX(-90deg) translateZ(100px);
+			    -ms-transform: rotateX(-90deg) translateZ(100px);
+			     -o-transform: rotateX(-90deg) translateZ(100px);
+			        transform: rotateX(-90deg) translateZ(100px);
+		}
+		.left {
+			-webkit-transform: rotateY(-90deg) translateZ(100px);
+			   -moz-transform: rotateY(-90deg) translateZ(100px);
+			    -ms-transform: rotateY(-90deg) translateZ(100px);
+			     -o-transform: rotateY(-90deg) translateZ(100px);
+			        transform: rotateY(-90deg) translateZ(100px);
+		}
+		.right {
+			-webkit-transform: rotateY(90deg) translateZ(100px);
+			   -moz-transform: rotateY(90deg) translateZ(100px);
+			    -ms-transform: rotateY(90deg) translateZ(100px);
+			     -o-transform: rotateY(90deg) translateZ(100px);
+			        transform: rotateY(90deg) translateZ(100px);
+		}
+	</style>
+</head>
+<body>
+	<div class="stage">
+	    <div class="container">
+	        <div class="side front">1</div>
+	        <div class="side back">2</div>
+	        <div class="side left">3</div>
+	        <div class="side right">4</div>
+	        <div class="side top">5</div>
+	        <div class="side bottom">6</div>
+	    </div>
+	</div>
+	<p>可以借助ps来观察</p>
+</body>
+</html>		

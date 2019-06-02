@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>使用多个2D变形，制作的一个3D立方体</title>
+	<style type="text/css">
+		* {
+			padding: 0;
+			margin: 0;
+		}
+		.stage {
+			position: relative;
+			float: left;
+			width: 300px;
+			height: 300px;
+			margin: 15px;
+			-webkit-perspective: 1200px;
+			   -moz-perspective: 1200px;
+			    -ms-perspective: 1200px;
+			     -o-perspective: 1200px;
+			        perspective: 1200px;
+		}
+		.container {
+			position: relative;
+			width: 100px;
+			height: 230px;
+			top: 50%;
+			left: 50%;
+			margin: -100px 0 0 -50px;
+			-webkit-transform-style: preserve-3d;
+			   -moz-transform-style: preserve-3d;
+			    -ms-transform-style: preserve-3d;
+			     -o-transform-style: preserve-3d;
+			        transform-style: preserve-3d;
+		}
+		.container:hover {
+			-webkit-animation: spin 5s linear infinite;
+			-moz-animation: spin 5s linear infinite;
+			-ms-animation: spin 5s linear infinite;
+			-o-animation: spin 5s linear infinite;
+			animation: spin 5s linear infinite;
+		}
+		/*动画*/
+		@-webkit-keyframes spin {
+			from {
+				-webkit-transform: rotateY(0deg);
+			}
+			to {
+				-webkit-transform: rotateY(360deg);
+			}
+		}
+		@-moz-keyframes spin {
+			from {
+				-moz-transform: rotateY(0deg);
+			}
+			to {
+				-moz-transform: rotateY(360deg);
+			}
+		}
+		@-ms-keyframes spin {
+			from {
+				-ms-transform: rotateY(0deg);
+			}
+			to {
+				-ms-transform: rotateY(360deg);
+			}
+		}
+		@-o-keyframes spin {
+			from {
+				-o-transform: rotateY(0deg);
+			}
+			to {
+				-o-transform: rotateY(360deg);
+			}
+		}
+		.side {
+			position: absolute;
+			font-size: 20px;
+			line-height: 100px;
+			height: 100px;
+			width: 100px;
+			font-weight: bold;
+			color: #fff;
+			text-align: center;
+			text-shadow: 0 -1px 0 rgba(0, 0, 0, .2);
+			text-transform: uppercase;
+		}
+		.top {
+			background-color: #9acc53;
+			-webkit-transform: rotate(-45deg) skew(15deg, 15deg);
+			   -moz-transform: rotate(-45deg) skew(15deg, 15deg);
+			    -ms-transform: rotate(-45deg) skew(15deg, 15deg);
+			     -o-transform: rotate(-45deg) skew(15deg, 15deg);
+			        transform: rotate(-45deg) skew(15deg, 15deg);
+		}
+		.left {
+			background-color: #8ec63f;
+			-webkit-transform: rotate(15deg) skew(15deg, 15deg) translate(-50%, 100%);
+			   -moz-transform: rotate(15deg) skew(15deg, 15deg) translate(-50%, 100%);
+			    -ms-transform: rotate(15deg) skew(15deg, 15deg) translate(-50%, 100%);
+			     -o-transform: rotate(15deg) skew(15deg, 15deg) translate(-50%, 100%);
+			        transform: rotate(15deg) skew(15deg, 15deg) translate(-50%, 100%);
+		}
+		.right {
+			background-color: #80b239;
+			-webkit-transform: rotate(-15deg) skew(-15deg, -15deg) translate(50%, 100%);
+			   -moz-transform: rotate(-15deg) skew(-15deg, -15deg) translate(50%, 100%);
+			    -ms-transform: rotate(-15deg) skew(-15deg, -15deg) translate(50%, 100%);
+			     -o-transform: rotate(-15deg) skew(-15deg, -15deg) translate(50%, 100%);
+			        transform: rotate(-15deg) skew(-15deg, -15deg) translate(50%, 100%);
+		}
+	</style>
+</head>
+<body>
+	<div class="stage">
+	    <div class="container">
+	        <div class="side top">1</div>
+	        <div class="side left">2</div>
+	        <div class="side right">3</div>
+	    </div>
+	</div>
+	<p>可以借助ps来观察</p>
+</body>
+</html>		

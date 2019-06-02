@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>页面板块可横向滑动（在手机上，不会出现滚动条）</title>
+	<style type="text/css">
+		.container {
+			max-width: 960px;
+			width: 100%;
+		}
+		.list {
+			padding: 0;
+			max-width: 600px;
+			width: 100%;
+			list-style: none;
+			overflow-x:scroll;
+			overflow-y:hidden;
+			white-space: nowrap;
+			float:left;
+		}
+		.list li{
+	        position:relative;
+	        width: 100%;
+	        height: 400px;
+	        display:inline-block;
+	       vertical-align:middle;
+		 }
+		 .list img{
+		 	width: 100%;
+		 	height: 100%;
+		 }
+	</style>
+</head>
+<body>
+	<div class="container">
+		<ul class="list">
+			<li><img src="images/1.jpg" alt=""></li>
+			<li><img src="images/2.jpg" alt=""></li>
+			<li><img src="images/1.jpg" alt=""></li>
+			<li><img src="images/2.jpg" alt=""></li>
+			<li><img src="images/1.jpg" alt=""></li>
+		</ul>
+	</div>
+</body>
+</html>		

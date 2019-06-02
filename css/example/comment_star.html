@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>京东的评价小星星</title>
+	<style type="text/css">
+		.container {
+			max-width: 960px;
+			width: 100%;
+		}
+		.comment-item-star {
+		    display: block;
+		    overflow: hidden;
+		    width: 70px;
+		    height: 10px;
+		    margin-top: 10px;
+		    background: url("images/comment_star.png") repeat-x 0 -10px;
+		    background-size: 14px 20px;
+		}
+		.comment-item-star .real-star {
+		    display: block;
+		    height: 20px;
+		    vertical-align: top;
+		    background: url("images/comment_star.png") repeat-x 0 0;
+		    background-size: 14px 20px;
+		}
+		.comment-stars-width1 {
+		    width: 20%;
+		}
+		.comment-stars-width2 {
+		    width: 40%;
+		}
+		.comment-stars-width3 {
+		    width: 60%;
+		}
+		.comment-stars-width4 {
+		    width: 80%;
+		}
+		.comment-stars-width5 {
+		    width: 100%;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<span class="comment-item-star">
+			<span class="real-star comment-stars-width5"></span>
+		</span>
+		<span class="comment-item-star">
+			<span class="real-star comment-stars-width4"></span>
+		</span>
+		<span class="comment-item-star">
+			<span class="real-star comment-stars-width3"></span>
+		</span>
+		<span class="comment-item-star">
+			<span class="real-star comment-stars-width2"></span>
+		</span>
+		<span class="comment-item-star">
+			<span class="real-star comment-stars-width1"></span>
+		</span>
+	</div>
+</body>
+</html>		
