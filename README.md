@@ -95,3 +95,7 @@
  * 响应式图片
  * css中的简写总结
 
+
+## Note
+
+[移动端网页适配必备基础之viewport](./note/viewport.md)
